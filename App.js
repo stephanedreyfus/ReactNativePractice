@@ -1,6 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { Component } from 'react';
+import { StyleSheet,
+  TouchableOpacity,
+  Text,
+  View,
+  Button,
+ } from 'react-native';
+ 
+class App extends Component {
+  state = {
+    count: 0
+  }
+
+  onPress = () => {
+    this.setState({
+      count: this.state.count + 1
+    });
+  }
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={this.onPress}
+        >
+          <Text>Click me!</Text>
+        </TouchableOpacity>
+        <View>
+          <Text>
+            You clicked { this.state.count } times.
+          </Text>
+        </View>
+        <StatusBar style="auto" />
+      </View>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -9,21 +45,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  button: {
+    alignItems: 'center',
+    backgroundColor: '#DDDDDD',
+    padding: 10,
+    marginBottom: 10,
+  },
 });
-
-const App = () => {
-  const [count, setCount] = useState(0);
-
-  return (
-    <View style={styles.container}>
-      <Text>You clicked {count} times</Text>
-      <Button
-        onPress={() => setCount(count + 1)}
-          title="Click me!"
-      />
-      <StatusBar style="auto"/>
-    </View>
-  )
-}
 
 export default App;
